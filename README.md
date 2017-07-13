@@ -96,16 +96,16 @@ kubectl get nodes
 
 You should see the hostname of your GPU+ paperspace machine (the worker node) on this list.
 
-In Kubernetes language, a deployment is a yaml file which defines an application that you would like to run on your kubernetes cluster. The deployment defines which docker container is used and what its features/specs are. Additionally, the yaml file contains a service description which is responsible for assigning an addressable port to the deployment. We are using the Kubernetes `NodePort` service type which will choose a port to assign to the container and make it available on all worker nodes. For now, all you need to know is that Kubernetes will find our GPU-backed worker node and send the Jupyter notebook to it.
+In Kubernetes language, a deployment is a yaml file which defines an application that you would like to run on your kubernetes cluster. The deployment defines which docker container is used and what its features/specs are. Additionally, the yaml file contains a service description which is responsible for assigning an addressable port to the deployment. We are using the Kubernetes [`NodePort`](https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport) service type which will choose a port to assign to the container and make it available on all worker nodes. For now, all you need to know is that Kubernetes will find our GPU-backed worker node and send the Jupyter notebook to it.
 
 
-Download the yaml file from this github repo (you could also copy/paste it using Vim, Nano, Emacs, etc)<br>
+Download the [yaml file from this github repo](deployments/tf-jupyter.yaml) (you could also copy/paste it using Vim, Nano, Emacs, etc)<br>
 ```
-wget https://raw.githubusercontent.com/Paperspace/Kubernetes-GPU-Guide/master/deployments/example-gpu-deployment.yaml
+wget https://raw.githubusercontent.com/Paperspace/GPU-Kubernetes-Guide/master/deployments/tf-jupyter.yaml
 ```
 Have kubernetes deploy it:<br>
 ```
-kubectl apply -f example-gpu-deployment.yaml
+kubectl apply -f tf-jupyter.yaml
 ```
 
 If all goes as planned you can
@@ -121,7 +121,7 @@ That's it. You have done what very few people have accomplished -- a GPU-backed 
 
 ![screen shot 2017-07-13 at 12 22 56 pm](https://user-images.githubusercontent.com/585865/28176617-201ae10e-67c6-11e7-8601-a840fc4c867e.png)
 
-Now, in [Part 2]() we will cover adding storage, and building out a real pipeline.
+Now, in Part 2 (coming soon) we will cover adding storage, and building out a real ML pipeline.
 
 ## Next Steps (Coming Soon)
   * #### Part 2: Distributed ML on a GPU cluster
