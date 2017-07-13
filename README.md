@@ -1,5 +1,5 @@
 # How to setup a production-grade Kubernetes GPU cluster on Paperspace in 10 minutes for $10. 🌈
-*note: this guide accompanies a blog post here: and is heavily derived from the fantastic guide [here](https://github.com/azlyth/Kubernetes-GPU-Guide)*
+*note: this guide accompanies an upcoming blog post here and is heavily derived from the fantastic guide [here](https://github.com/azlyth/Kubernetes-GPU-Guide)*
 ## Table of Contents
   * [Why Kubernetes](#quick-kubernetes-revive)
   * [Step 1: Create a Paperspace Account]()
@@ -11,11 +11,13 @@
   * [Step 7: Assign a public IP to Worker node]()
   * [Step 8: All done! Woooo!]()
   * [Acknowledgements](#acknowledgements)
-  * [Authors](#authors)
   * [License](#license)
 
 #### Why Kubernetes
-If you are a startup or individual interested in getting a production-grade ML/Datascience pipeline going, Kubernetes can be extremely valuable. It is without a doubt one of the best
+If you are a startup or individual interested in getting a production-grade ML/Datascience pipeline going, Kubernetes can be extremely valuable. It is without a doubt one of the best tools for orchestrating complex deployements and managing specific hardware interdependencies.
+
+Unlike the web development world, the ML/AI/Datascience community does not yet have entirely established patterns and best practices. We at Paperspace beleive that Kubernetes could play a big part in helping companies get up and running quickly and with the best performance possible.
+
 ### Step 1: Create a Paperspace Account
 Head over to [Paperspace to create your account](https://www.paperspace.com/account/signup) (it only takes two seconds). You will need to confirm your email and then log back in. Once in there you will need to add a credit card on file. This tutorial should only cost about $5 to get going (plus any additional usage after).
 
@@ -107,7 +109,7 @@ kubectl apply -f example-gpu-deployment.yaml
 If all goes as planned you can
 
 ### Step 7: Assign a public IP to Worker node
-Ok, so this is not a best practice, but it will quickly let us see if everything is working. We will apply a public IP to our worker node. Because this has all been done in our private network nothing is publicly accessible from the outside world. 
+Ok, so this is not a best practice, but it will quickly let us see if everything is working. We will apply a public IP to our worker node. Because this has all been done in our private network nothing is publicly accessible from the outside world.
 
 ![screenshot_7](https://user-images.githubusercontent.com/585865/28178188-7d7f5186-67cb-11e7-87e5-42b2e0ae189f.png)
 
