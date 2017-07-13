@@ -13,6 +13,7 @@
   * [Acknowledgements](#acknowledgements)
   * [License](#license)
 
+
 #### Why Kubernetes
 If you are a startup or individual interested in getting a production-grade ML/Datascience pipeline going, Kubernetes can be extremely valuable. It is without a doubt one of the best tools for orchestrating complex deployements and managing specific hardware interdependencies.
 
@@ -61,9 +62,9 @@ Now, download and execute the [initialization script](scripts/init-master.sh) wh
 
 *Note: because we are building our cluster on an isolated private network we can safely assume that all nodes can talk to one another but are not yet publicly addressable*
 ```
-wget https://github.com/Paperspace/Kubernetes-GPU-Guide/blob/master/scripts/init-master.sh
+wget https://raw.githubusercontent.com/Paperspace/GPU-Kubernetes-Guide/master/scripts/init-master.sh
 chmod +x init-master.sh
-sudo ./init-master.sh <IP-of-master>
+sudo ./init-master.sh <private-IP-of-master>
 ```
 This will return a  token in the format ```--token f38242.e7f3XXXXXXXXe231e```. **This token, combined with the private IP of this host (i.e. `10.30.83.3`) will be used by the worker node to discover and join the Kubernetes cluster. The port is usually ```6443```.**
 
@@ -78,8 +79,9 @@ First, create a Paperspace GPU+ instance running Ubuntu 16.04 and make sure it i
 Execute the [initialization script](scripts/init-worker.sh) with the correct token and private IP of your master that you copied from above. (*ProTip: For this type of work it is best to open two browser tabs and have two Paperspace terminals running one for the master and one for the worker*). <br/>
 
 ```
+wget https://raw.githubusercontent.com/Paperspace/GPU-Kubernetes-Guide/master/scripts/init-worker.sh
 chmod +x init-worker.sh
-sudo ./init-worker.sh <Token-of-Master> <IP-of-master>:<Port>
+sudo ./init-worker.sh <Token-of-Master> <private-IP-of-master>:<Port>
 ```
 
 Once it has joined, you will need to reboot the machine. The nvidia driver is installed but it needs a reboot to work. If you do not do this then the node will not appear to be GPU-enabled to our Kubernetes cluster.
@@ -120,6 +122,17 @@ That's it. You have done what very few people have accomplished -- a GPU-backed 
 ![screen shot 2017-07-13 at 12 22 56 pm](https://user-images.githubusercontent.com/585865/28176617-201ae10e-67c6-11e7-8601-a840fc4c867e.png)
 
 Now, in [Part 2]() we will cover adding storage, and building out a real pipeline.
+
+## Next Steps (Coming Soon)
+  * #### Part 2: Distributed ML on a GPU cluster
+    * Using small dataset (MINST?) and TensorFlow Distributed
+  * #### Part 3: Real-world use-case
+    * Kubernetes Persistent Volumes
+    * Introducing Helm
+    * Real-dataset (Distributed CNN)
+    * similar:
+      * https://medium.com/intuitionmachine/kubernetes-gpus-tensorflow-8696232862ca
+      * https://medium.com/intuitionmachine/gpus-kubernetes-for-deep-learning-part-3-3-automating-tensorflow-deployment-5dc4d5472e91
 
 ## Acknowledgements
 Most of the heavy lifting here came from the guide here: https://github.com/Langhalsdino/Kubernetes-GPU-Guide which was enormously helpful! A huge shoutout to [Langhalsdino](https://github.com/Langhalsdino).

@@ -25,6 +25,9 @@ sudo apt-get install -y nvidia-cuda-dev nvidia-cuda-toolkit nvidia-nsight
 sudo systemctl enable docker && systemctl start docker
 sudo systemctl enable kubelet && systemctl start kubelet
 
+#put CUDA in the write place for tensorflow docker container
+sudo cp /usr/lib/x86_64-linux-gnu/libcuda* /usr/lib/nvidia-375/
+
 for file in /etc/systemd/system/kubelet.service.d/*-kubeadm.conf
 do
     echo "Found ${file}"
