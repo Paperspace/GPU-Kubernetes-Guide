@@ -1,4 +1,4 @@
-# How to setup a production-grade Kubernetes GPU cluster on Paperspace in 10 minutes for $10 🌈
+# [DRAFT] How to setup a production-grade Kubernetes GPU cluster on Paperspace in 10 minutes for $10 🌈
 *note: this guide accompanies an upcoming blog post here and is heavily derived from the fantastic guide [here](https://github.com/azlyth/Kubernetes-GPU-Guide)*
 ## Table of Contents
   * [Why Kubernetes](#quick-kubernetes-revive)
@@ -125,7 +125,7 @@ Now, in Part 2 (coming soon) we will cover adding storage, and building out a re
 
 ## Next Steps (Coming Soon)
   * #### Part 2: Distributed ML on a GPU cluster
-    * Using small dataset (MINST?) and TensorFlow Distributed
+    * Using small dataset (MNIST?) and TensorFlow Distributed
   * #### Part 3: Real-world use-case
     * Kubernetes Persistent Volumes
     * Introducing Helm
