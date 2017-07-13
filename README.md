@@ -2,14 +2,14 @@
 *note: this guide accompanies a blog post here: and is heavily derived from the fantastic guide [here](https://github.com/azlyth/Kubernetes-GPU-Guide)*
 ## Table of Contents
   * [Why Kubernetes](#quick-kubernetes-revive)
-  * [Cluster Overview](#rough-overview-on-the-structure-of-the-cluster)
-  * [Step 1: Create a Paperspace Account](#Step-1:-Create-a-Paperspace-Account)
+  * [Step 1: Create a Paperspace Account]()
   * [Step 2: Create a private network]()
   * [Step 3: Prepare master node (CPU)]()
   * [Step 4: Install Kubernetes on the master node (CPU)]()
   * [Step 5: Prepare GPU worker node]()
   * [Step 6: Deploy a Jupyter-notebook with GPU-support]()
   * [Step 7: Assign a public IP to Worker node]()
+  * [Step 8: All done! Woooo!]()
   * [Acknowledgements](#acknowledgements)
   * [Authors](#authors)
   * [License](#license)
@@ -112,9 +112,18 @@ Ok, so this is not a best practice, but it will quickly let us see if everything
 ![screenshot_7](https://user-images.githubusercontent.com/585865/28178188-7d7f5186-67cb-11e7-87e5-42b2e0ae189f.png)
 
 
-#### Step 8: All done! Woooo!
+### Step 8: All done! Woooo!
 That's it. You have done what very few people have accomplished -- a GPU-backed Kubernetes cluster in just a few minutes. Go to your new public IP address and port and you should now have a jupyter notebook running!
 
 ![screen shot 2017-07-13 at 12 22 56 pm](https://user-images.githubusercontent.com/585865/28176617-201ae10e-67c6-11e7-8601-a840fc4c867e.png)
 
 Now, in [Part 2]() we will cover adding storage, and building out a real pipeline.
+
+## Acknowledgements
+Most of the heavy lifting here came from the guide here: https://github.com/Langhalsdino/Kubernetes-GPU-Guide which was enormously helpful! A huge shoutout to [Langhalsdino](https://github.com/Langhalsdino).
+
+Additional improvements were suggested by [azlyth](https://github.com/azlyth) specifically getting some of the networking to work on Paperspace.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
