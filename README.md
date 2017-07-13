@@ -1,4 +1,4 @@
-# How to setup a production-grade Kubernetes GPU cluster on Paperspace in 10 minutes for $10. 🌈
+# How to setup a production-grade Kubernetes GPU cluster on Paperspace in 10 minutes for $10 🌈
 *note: this guide accompanies an upcoming blog post here and is heavily derived from the fantastic guide [here](https://github.com/azlyth/Kubernetes-GPU-Guide)*
 ## Table of Contents
   * [Why Kubernetes](#quick-kubernetes-revive)
