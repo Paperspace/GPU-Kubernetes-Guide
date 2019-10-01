@@ -33,11 +33,11 @@ You might need to refresh the page if the network doesnt show up after about 20 
 
 ### Step 3: Prepare master node (CPU)
 
-OK, so now you have a Paperspace team account and a private network. No go to create your first machine on this private network. On the [machine create page](https://www.paperspace.com/console/machine/create/) your can create a [Paperspace C2 instance](https://paperspace.zendesk.com/hc/en-us/articles/236361368-What-types-of-machines-does-Paperspace-offer-) running Ubuntu 16.04 and make sure it is on your private network.
+OK, so now you have a Paperspace team account and a private network. No go to create your first machine on this private network. On the [machine create page](https://www.paperspace.com/console/machine/create/) your can create a [Paperspace C3 instance](https://paperspace.zendesk.com/hc/en-us/articles/236361368-What-types-of-machines-does-Paperspace-offer-) running Ubuntu 18.04 and make sure it is on your private network.
 
 ![screenshot_1](https://user-images.githubusercontent.com/585865/28176369-16481aa8-67c5-11e7-82d6-b43ef4f3881a.png)
 
-Once this machine is created (i.e. it is no longer "provisioning" and has transitioned to the "ready" state) you will be emailed a temporary password. Make a note of the private IP address (in our case, it is `10.30.83.3`).
+Once this machine is created (i.e. it is no longer "provisioning" and has transitioned to the "ready" state) you will be emailed a temporary password.
 
 ![screenshot_3](https://user-images.githubusercontent.com/585865/28176455-79486fea-67c5-11e7-8c63-dc5ec464e552.png)
 
@@ -46,7 +46,7 @@ Go to your Paperspace Console and open the machine. It will ask you for your pas
 
 ![screenshot_5](https://user-images.githubusercontent.com/585865/28177505-ffd25fc8-67c8-11e7-94de-c84dcffbb0d2.png)
 
-You are now in the web terminal for your master node. No you should disable the existing UFW firewall by typing the following:
+You are now in the web terminal for your master node. First, disable the existing UFW firewall by typing the following:
 
 ```
 sudo ufw disable
@@ -54,34 +54,31 @@ sudo ufw disable
 
  (*note: we do this for testing only, you will want to reenable it later for security. That said, on Paperspace before you add a public IP your machines are fully isolated*)
 
-
-
-
 ### Step 4: Install Kubernetes on the master node (CPU)
-Now, download and execute the [initialization script](scripts/init-master.sh) which will setup the kubernetes master. It is very helpful to go through this short (<40 LOC) script to see what it is doing. At a high level, it downloads Kubernetes, Docker, and a few required packages, installs them, and initiates the Kubernetes process using the `kubeadm` tool.
+Now, download and execute the [initialization script](scripts/init-master.sh) which will set up the kubernetes master. It is very helpful to go through this short (<40 LOC) script to see what it is doing. At a high level, it downloads Kubernetes, Docker, and a few required packages, installs them, and initiates the Kubernetes process using the `kubeadm` tool.
 
 *Note: because we are building our cluster on an isolated private network we can safely assume that all nodes can talk to one another but are not yet publicly addressable*
 ```
 wget https://raw.githubusercontent.com/Paperspace/GPU-Kubernetes-Guide/master/scripts/init-master.sh
 chmod +x init-master.sh
-sudo ./init-master.sh <private-IP-of-master>
+sudo ./init-master.sh
 ```
-This will return a  token in the format ```--token f38242.e7f3XXXXXXXXe231e```. **This token, combined with the private IP of this host (i.e. `10.30.83.3`) will be used by the worker node to discover and join the Kubernetes cluster. The port is usually ```6443```.**
+This will return a join command in the format `kubeadm join xxxx:6443 --token u328wq.xxxxx --discovery-token-ca-cert-hash sha256:xxxxx`. Copy those parameter values for joining new nodes. You can regenerate a new join command with `kubeadm token create --print-join-command`.
 
 ### Step 5: Prepare GPU worker node
 
-Yay! We have a kubernetes master node up and running. The next step is to add a GPU-backed worker node and join it to the network. Luckily we have a script for this too (but again, it is a really good practice to go through the scrip to see what it is doing).
+Yes! We have a kubernetes master node up and running. The next step is to add a GPU-backed worker node and join it to the network. Luckily we have a script for this too (but again, it is a really good practice to go through the scrip to see what it is doing).
 
 
 First, create a Paperspace GPU+ instance running Ubuntu 16.04 and make sure it is on your private network. We could use the ML-in-a-box template for this, but really we only need the NVIDIA driver and CUDA installed which our script will download and install for us. This worker node will be used to run GPU-backed docker containers that are assigned to it by the Kubernetes master node.
 
 
-Execute the [initialization script](scripts/init-worker.sh) with the correct token and private IP of your master that you copied from above. (*ProTip: For this type of work it is best to open two browser tabs and have two Paperspace terminals running one for the master and one for the worker*). <br/>
+Execute the [initialization script](scripts/init-worker.sh) with the correct parameter values that you copied from above. (*ProTip: For this type of work it is best to open two browser tabs and have two Paperspace terminals running one for the master and one for the worker*). <br/>
 
 ```
 wget https://raw.githubusercontent.com/Paperspace/GPU-Kubernetes-Guide/master/scripts/init-worker.sh
 chmod +x init-worker.sh
-sudo ./init-worker.sh <Token-of-Master> <private-IP-of-master>:<Port>
+sudo ./init-worker.sh <ip:port> <token> <ca cert hash>
 ```
 
 Once it has joined, you will need to reboot the machine. The nvidia driver is installed but it needs a reboot to work. If you do not do this then the node will not appear to be GPU-enabled to our Kubernetes cluster.
