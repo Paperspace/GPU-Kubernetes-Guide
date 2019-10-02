@@ -35,7 +35,7 @@ You might need to refresh the page if the network doesnt show up after about 20 
 
 OK, so now you have a Paperspace team account and a private network. No go to create your first machine on this private network. On the [machine create page](https://www.paperspace.com/console/machine/create/) your can create a [Paperspace C3 instance](https://paperspace.zendesk.com/hc/en-us/articles/236361368-What-types-of-machines-does-Paperspace-offer-) running Ubuntu 18.04 and make sure it is on your private network.
 
-![screenshot_1](https://user-images.githubusercontent.com/585865/28176369-16481aa8-67c5-11e7-82d6-b43ef4f3881a.png)
+![screenshot_1](https://user-images.githubusercontent.com/547877/66070173-d5304200-e51e-11e9-8fc8-bc1e9d1d2fdc.png)
 
 Once this machine is created (i.e. it is no longer "provisioning" and has transitioned to the "ready" state) you will be emailed a temporary password.
 
